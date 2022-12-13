@@ -1,0 +1,1 @@
+netconf ansible_host=127.0.0.1 ansible_connection=netconf ansible_user=netconf ansible_password=netconf

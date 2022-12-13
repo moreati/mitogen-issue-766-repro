@@ -1,0 +1,7 @@
+- name: Get running configuration and state data
+  hosts: all
+  gather_facts: false
+  strategy: "{{ strategy }}"
+  tasks:
+    - name: Get running configuration and state data
+      ansible.netcommon.netconf_get:
