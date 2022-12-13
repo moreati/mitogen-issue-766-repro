@@ -1,5 +1,8 @@
 ### Reproduction Instructions
 
+0. Install virtualenv
+   ```pip3 install virtualenv`
+
 1. Create Virtual Environment
 
    ```virtualenv -p python3.8 .venv```
@@ -18,7 +21,7 @@
 
 5. Start netconf server container
 
-   ```docker run -it --name sysrepo -p 830:830 --rm sysrepo/sysrepo-netopeer2:latest```
+   ```docker run -dt --name sysrepo -p 830:830 --rm sysrepo/sysrepo-netopeer2:latest```
 
 6. Run playbook with normal strategy
 
