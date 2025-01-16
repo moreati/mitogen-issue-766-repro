@@ -1,7 +1,31 @@
 - name: Get running configuration and state data
   hosts: all
   gather_facts: false
-  strategy: "{{ strategy }}"
   tasks:
-    - name: Get running configuration and state data
-      ansible.netcommon.netconf_get:
+    - block:
+        - name: Start container
+          delegate_to: localhost
+          containers.podman.podman_container:
+            name: sysprep
+            image: docker.io/sysrepo/sysrepo-netopeer2:latest
+            auto_remove: true
+            detach: true
+            recreate: true
+            published_ports:
+              - "{{ ansible_port }}:830"
+
+        - name: Wait for container
+          delegate_to: localhost
+          # TODO robust condition. wait_for + search_regex? wait_for_connection?
+          wait_for:
+            timeout: 5
+
+        - name: Get running configuration and state data
+          ansible.netcommon.netconf_get:
+
+      always:
+        - name: Cleanup container
+          delegate_to: localhost
+          containers.podman.podman_container:
+            name: sysprep
+            state: absent

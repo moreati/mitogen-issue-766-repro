@@ -1,3 +1,0 @@
-ansible-base==2.10.17
-mitogen==0.3.3
-ncclient==0.6.13
