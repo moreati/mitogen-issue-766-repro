@@ -1,6 +1,6 @@
 - name: Get running configuration and state data
   hosts: all
-  gather_facts: false
+  gather_facts: true
   tasks:
     - block:
         - name: Start container
